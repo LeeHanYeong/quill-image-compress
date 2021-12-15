@@ -71,13 +71,21 @@ const quill = new Quill(editor, {
 
 ## Options
 
-- **maxWidth**
+- **[Integer] maxWidth, maxHeight**
   - Maximum width of images (in pixels)
-- **quality** 
+- **[Float] quality** 
   - Image quality range: 0.0 - 1.0
-- **imageType**
+- **[String] imageType**
   - Values: 'image/jpeg' , 'image/png' ... etc
-- **debug**
+- **[Array] keepImageTypes**  
+  Preserve image type and apply quality, maxWidth, maxHeight options
+  - Values: ['image/jpeg', 'image/png']
+
+- **[Array] ignoreImageTypes**  
+  Image types contained in this array retain their original images, do not compress them.
+  - Values: ['image'/jpeg', 'image/webp']
+
+- **[Boolean] debug**
   - Displays console logs: true/false
 
 ## Thanks

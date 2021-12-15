@@ -4,10 +4,15 @@ export async function downscaleImage(
   maxWidth,
   maxHeight,
   imageType,
+  keepImageTypes,
+  ignoreImageTypes,
   imageQuality,
   logger,
 ) {
   "use strict";
+  // Input image values
+  const inputImageType = dataUrl.split(';')[0].split(':')[1];
+
   // Provide default values
   imageType = imageType || "image/jpeg";
   imageQuality = imageQuality || 0.7;
@@ -34,6 +39,18 @@ export async function downscaleImage(
 
   // Draw the downscaled image on the canvas and return the new data URL.
   const ctx = canvas.getContext("2d");
+
+  // If the type is included in the ignore list, return the original
+  if (ignoreImageTypes.includes(inputImageType)) {
+    return dataUrl;
+  }
+
+  // If the type is included in keep type list, fix the image type
+  if (keepImageTypes.includes(inputImageType)) {
+    imageType = inputImageType;
+  }
+
+  // If the type is "image/jpeg", set the background to white
   if (imageType === "image/jpeg") {
     ctx.fillStyle = "#FFFFFF";
     ctx.fillRect(0, 0, image.width, image.height);
@@ -46,6 +63,8 @@ export async function downscaleImage(
       maxWidth,
       maxHeight,
       imageType,
+      ignoreImageTypes,
+      keepImageTypes,
       imageQuality,
     },
     newHeight,

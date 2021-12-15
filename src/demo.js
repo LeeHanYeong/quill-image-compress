@@ -20,9 +20,11 @@ var quill = new Quill("#editor", {
     },
     imageCompressor: {
       quality: 0.9,
-      maxWidth: 200,
-      maxHeight: 200,
-      imageType: 'image/png',
+      maxWidth: 300,
+      maxHeight: 300,
+      imageType: 'image/jpeg',
+      keepImageTypes: ['image/webp'],
+      ignoreImageTypes: ['image/png'],
       debug: true
     },
   }
